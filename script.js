@@ -110,6 +110,8 @@ downloadPdfButton.addEventListener('click', () => {
             htmlPreview.innerHTML = '<p style="color:#ef4444;">Error generating PDF. Please try again.</p>';
             console.error(err);
         });
+
+        markdownInput.value = "";
 });
 
 
