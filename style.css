@@ -1,0 +1,713 @@
+/* Global box-sizing for easier layout */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f3f4f6;
+    /* bg-gray-100 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    /* Remove default body margin */
+    padding: 0;
+    /* Remove default body padding */
+    overflow-x: hidden;
+    /* Prevent horizontal scrollbar on body */
+}
+
+/* Container for content */
+.container {
+    max-width: 1280px;
+    /* Equivalent to max-w-screen-xl in some Tailwind configs */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    /* p-4 default for mobile */
+    width: 100%;
+    /* Ensure container fills width on smaller screens */
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(to right, #2563eb, #4f46e5);
+    /* from-blue-600 to-indigo-700 */
+    padding: 1rem;
+    /* p-4 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* shadow-lg */
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    /* items-center */
+    justify-content: space-between;
+    /* justify-between */
+}
+
+.navbar-brand {
+    color: #fff;
+    /* text-white */
+    font-size: 1.5rem;
+    /* adjusted for smaller screens */
+    line-height: 2.25rem;
+    font-weight: 700;
+    /* font-bold */
+    letter-spacing: -0.025em;
+    /* tracking-tight */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    text-decoration: none;
+    /* For a link */
+    white-space: nowrap;
+    /* Prevent wrapping on small screens */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .navbar-brand {
+        font-size: 1.875rem;
+        /* text-3xl */
+    }
+}
+
+
+/* Main Content Grid */
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* grid-cols-1 */
+    gap: 1rem;
+    /* Smaller gap for mobile */
+    margin-top: 1rem;
+    /* Smaller margin-top for mobile */
+    flex-grow: 1;
+    /* flex-grow */
+    width: 100%;
+    /* Ensure grid itself doesn't overflow */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .main-content-grid {
+        gap: 1.5rem;
+        /* original gap-6 */
+        margin-top: 1.5rem;
+        /* original mt-6 */
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* md breakpoint */
+    .main-content-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        /* md:grid-cols-2 */
+    }
+}
+
+/* Card Sections (Input and HTML Preview) */
+.card-section {
+    background-color: #fff;
+    /* bg-white */
+    padding: 1rem;
+    /* p-4 default for mobile */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    /* shadow-xl */
+    border: 1px solid #e5e7eb;
+    /* border border-gray-200 */
+    display: flex;
+    flex-direction: column;
+    /* flex flex-col */
+    overflow: hidden;
+    /* Hide any internal overflow that might occur */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .card-section {
+        padding: 1.5rem;
+        /* p-6 */
+    }
+}
+
+.section-title {
+    font-size: 1.25rem;
+    /* Adjusted for mobile */
+    line-height: 2rem;
+    font-weight: 600;
+    /* font-semibold */
+    color: #1f2937;
+    /* text-gray-800 */
+    margin-bottom: 0.75rem;
+    /* Adjusted for mobile */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .section-title {
+        font-size: 1.5rem;
+        /* text-2xl */
+        margin-bottom: 1rem;
+    }
+}
+
+/* Markdown Input Textarea */
+.markdown-textarea {
+    width: 100%;
+    /* w-full */
+    flex-grow: 1;
+    /* flex-grow */
+    padding: 0.75rem;
+    /* Adjusted for mobile */
+    border: 1px solid #d1d5db;
+    /* border border-gray-300 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    transition: all 0.2s ease-in-out;
+    /* transition duration-200 ease-in-out */
+    color: #374151;
+    /* text-gray-700 */
+    resize: vertical;
+    /* Allow vertical resize only */
+    margin-bottom: 1rem;
+    /* mb-4 */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    /* shadow-inner */
+    min-height: 150px;
+    /* Slightly reduced min-height for mobile */
+    /* Removed overflow property here, as flex-grow and resize:vertical handles it */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .markdown-textarea {
+        padding: 1rem;
+        /* p-4 */
+        min-height: 200px;
+        /* original min-height */
+    }
+}
+
+.markdown-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5), inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    /* focus:ring-blue-500 combined with shadow-inner */
+    border-color: #3b82f6;
+    /* focus:border-blue-500 */
+}
+
+.markdown-textarea.error-border {
+    border-color: #ef4444;
+    /* border-red-500 */
+}
+
+/* Action Buttons Group */
+.action-buttons-group {
+    display: flex;
+    /* flex */
+    flex-direction: column;
+    /* flex-col */
+    gap: 0.75rem;
+    /* Smaller gap for mobile */
+    margin-top: 1.5rem;
+    /* Added margin for spacing after textarea */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .action-buttons-group {
+        flex-direction: row;
+        /* sm:flex-row */
+        gap: 1rem;
+        /* original gap-4 */
+    }
+}
+
+.action-button {
+    flex: 1;
+    /* flex-1 */
+    font-weight: 700;
+    /* font-bold */
+    padding: 0.75rem 1.25rem;
+    /* py-3 px-5 - slightly adjusted for mobile */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    transition: all 0.3s ease-in-out;
+    /* transition duration-300 ease-in-out */
+    transform: scale(1);
+    /* transform hover:scale-105 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* shadow-md */
+    outline: none;
+    /* focus:outline-none */
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 0.875rem;
+    /* Slightly smaller text for mobile buttons */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .action-button {
+        padding: 0.75rem 1.5rem;
+        /* py-3 px-6 */
+        font-size: 1rem;
+        /* Revert to normal size */
+    }
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+    /* hover:scale-105 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* hover:shadow-lg */
+}
+
+.action-button.preview-btn {
+    background-color: #22c55e;
+    /* bg-green-500 */
+}
+
+.action-button.preview-btn:hover {
+    background-color: #16a34a;
+    /* hover:bg-green-600 */
+}
+
+.action-button.preview-btn:focus {
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
+    /* focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 */
+}
+
+.action-button.download-btn {
+    background-color: #9333ea;
+    /* bg-purple-600 */
+}
+
+.action-button.download-btn:hover {
+    background-color: #7e22ce;
+    /* hover:bg-purple-700 */
+}
+
+.action-button.download-btn:focus {
+    box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.5);
+    /* focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 */
+}
+
+/* Loading Indicator */
+.loading-indicator {
+    display: none;
+    /* hidden */
+    margin-top: 1rem;
+    /* mt-4 */
+    text-align: center;
+    /* text-center */
+    color: #2563eb;
+    /* text-blue-600 */
+    font-weight: 500;
+    /* font-medium */
+    font-size: 0.875rem;
+    /* Adjusted for mobile */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .loading-indicator {
+        font-size: 1rem;
+        /* Revert to normal size */
+    }
+}
+
+.loading-indicator.visible {
+    display: block;
+}
+
+/* HTML Preview Area */
+.html-preview {
+    width: 100%;
+    /* w-full */
+    flex-grow: 1;
+    /* flex-grow */
+    padding: 0.75rem;
+    /* Adjusted for mobile */
+    border: 1px solid #d1d5db;
+    /* border border-gray-300 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    background-color: #f9fafb;
+    /* bg-gray-50 */
+    overflow-y: auto;
+    /* overflow-y-auto */
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    /* shadow-inner */
+    min-height: 150px;
+    /* Slightly reduced min-height for mobile */
+    word-wrap: break-word;
+    /* Ensure text wraps */
+    overflow-wrap: break-word;
+    /* Standard property for word wrapping */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview {
+        padding: 1rem;
+        /* p-4 */
+        min-height: 200px;
+        /* original min-height */
+    }
+}
+
+/* Custom scrollbar styles for better aesthetics */
+textarea::-webkit-scrollbar,
+.html-preview::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+textarea::-webkit-scrollbar-track,
+.html-preview::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb,
+.html-preview::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover,
+.html-preview::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Basic "Prose" like styling for rendered Markdown content */
+/* These styles aim to mimic the @tailwindcss/typography plugin's default output */
+/* Apply max-width to all children of html-preview and pdf-content-wrapper */
+.html-preview>*,
+.pdf-content-wrapper>* {
+    max-width: 100%;
+    /* Ensures children don't overflow their parent */
+}
+
+.html-preview h1,
+.pdf-content-wrapper h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 800;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.html-preview h2,
+.pdf-content-wrapper h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    margin-top: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.html-preview h3,
+.pdf-content-wrapper h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-top: 0.6rem;
+    margin-bottom: 0.3rem;
+}
+
+.html-preview h4,
+.pdf-content-wrapper h4 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview h1,
+    .pdf-content-wrapper h1 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .html-preview h2,
+    .pdf-content-wrapper h2 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin-top: 1.25rem;
+        margin-bottom: 0.625rem;
+    }
+
+    .html-preview h3,
+    .pdf-content-wrapper h3 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .html-preview h4,
+    .pdf-content-wrapper h4 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        margin-top: 0.875rem;
+        margin-bottom: 0.375rem;
+    }
+}
+
+.html-preview p,
+.pdf-content-wrapper p {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    line-height: 1.625;
+    font-size: 0.95rem;
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview p,
+    .pdf-content-wrapper p {
+        font-size: 1rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+.html-preview a,
+.pdf-content-wrapper a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.html-preview ul,
+.pdf-content-wrapper ul {
+    list-style-type: disc;
+    margin-left: 1rem;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    padding-left: 0.25em;
+}
+
+.html-preview ol,
+.pdf-content-wrapper ol {
+    list-style-type: decimal;
+    margin-left: 1rem;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    padding-left: 0.25em;
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview ul,
+    .pdf-content-wrapper ul {
+        margin-left: 1.25em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding-left: 0.5em;
+    }
+
+    .html-preview ol,
+    .pdf-content-wrapper ol {
+        margin-left: 1.25em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding-left: 0.5em;
+    }
+}
+
+.html-preview li,
+.pdf-content-wrapper li {
+    margin-bottom: 0.25em;
+}
+
+.html-preview strong,
+.pdf-content-wrapper strong {
+    font-weight: 700;
+}
+
+.html-preview em,
+.pdf-content-wrapper em {
+    font-style: italic;
+}
+
+.html-preview blockquote,
+.pdf-content-wrapper blockquote {
+    border-left: 0.25rem solid #d1d5db;
+    /* border-gray-300 */
+    padding-left: 0.75rem;
+    /* Adjusted for mobile */
+    margin-left: 0;
+    margin-right: 0;
+    color: #4b5563;
+    /* text-gray-600 */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview blockquote,
+    .pdf-content-wrapper blockquote {
+        padding-left: 1rem;
+    }
+}
+
+.html-preview code,
+.pdf-content-wrapper code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    background-color: #e5e7eb;
+    /* bg-gray-200 */
+    padding: 0.1em 0.2em;
+    /* Adjusted for mobile */
+    border-radius: 0.25rem;
+    font-size: 0.8em;
+    /* Adjusted for mobile */
+    color: #374151;
+    white-space: pre-wrap;
+    /* Ensure code wraps within inline code */
+    word-break: break-all;
+    /* Break long words for inline code */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview code,
+    .pdf-content-wrapper code {
+        padding: 0.125em 0.25em;
+        font-size: 0.875em;
+    }
+}
+
+.html-preview pre,
+.pdf-content-wrapper pre {
+    background-color: #1f2937;
+    /* bg-gray-800 */
+    color: #f9fafb;
+    /* text-gray-50 */
+    padding: 0.75rem;
+    /* Adjusted for mobile */
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    /* Allow horizontal scroll for long code lines */
+    margin-top: 0.8em;
+    /* Adjusted for mobile */
+    margin-bottom: 0.8em;
+    /* Adjusted for mobile */
+    font-size: 0.8em;
+    /* Adjusted for mobile */
+    line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview pre,
+    .pdf-content-wrapper pre {
+        padding: 1rem;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-size: 0.875em;
+    }
+}
+
+.html-preview pre code,
+.pdf-content-wrapper pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    color: inherit;
+    white-space: pre;
+    /* Maintain original white-space for code blocks in pre */
+    word-break: normal;
+    /* Do not force break within pre, let overflow-x handle it */
+}
+
+.html-preview hr,
+.pdf-content-wrapper hr {
+    border: none;
+    border-top: 1px solid #d1d5db;
+    /* border-gray-300 */
+    margin-top: 1.5em;
+    /* Adjusted for mobile */
+    margin-bottom: 1.5em;
+    /* Adjusted for mobile */
+}
+
+@media (min-width: 640px) {
+
+    /* sm breakpoint */
+    .html-preview hr,
+    .pdf-content-wrapper hr {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+}
+
+/* Images inside content */
+.html-preview img,
+.pdf-content-wrapper img {
+    max-width: 100%;
+    /* Ensure images don't overflow */
+    height: auto;
+    display: block;
+    /* Prevent extra space below image */
+    margin-left: auto;
+    /* Center images */
+    margin-right: auto;
+    /* Center images */
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* Specific styling for PDF content wrapper */
+.pdf-content-wrapper {
+    /* This class is added to the temporary element for PDF generation */
+    background-color: #FFFFFF;
+    /* Ensure white background for PDF */
+    color: #333333;
+    /* Ensure dark text color */
+    font-size: 12pt;
+    /* Default font size */
+    line-height: 1.6;
+    /* Default line height */
+    padding: 20mm;
+    /* Apply padding for page margins */
+    width: 210mm;
+    /* A4 width */
+    min-height: 297mm;
+    /* A4 height */
+    /* Removed box-sizing: border-box here as it's global now */
+    /* Added explicit overflow-x hidden for robustness in PDF context */
+    overflow-x: hidden;
+}
